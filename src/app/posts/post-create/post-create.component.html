@@ -1,28 +1,31 @@
 <mat-card>
-  <form (submit)="onAddPost(postForm)" #postForm="ngForm">
+  <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
     <mat-form-field>
       <input
-       matInput
-       type="text"
-       placeholder="Recipe Name Here"
-       name="title"
-       ngModel
-       required
-       #title="ngModel">
-       <mat-error *ngIf="title.invalid">Please enter a recipe name</mat-error>
+        matInput
+        type="text"
+        name="title"
+        [ngModel]="post?.title"
+        required
+        minlength="3"
+        placeholder="Post Title"
+        #title="ngModel">
+      <mat-error *ngIf="title.invalid">Please enter a recipe name.</mat-error>
     </mat-form-field>
     <mat-form-field>
       <textarea
-       matInput
-       rows="6"
-       placeholder="Type Ingredients Here"
-       [(ngModel)]="enteredContent"
-       name="content"
-       ngModel
-       required
-       #content="ngModel"></textarea>
-        <mat-error *ngIf="content.invalid">Please enter instructions</mat-error>
+        matInput
+        rows="4"
+        name="content"
+        [ngModel]="post?.content"
+        required
+        placeholder="Post Content"
+        #content="ngModel"></textarea>
+      <mat-error *ngIf="content.invalid">Please enter ingerdients.</mat-error>
     </mat-form-field>
-    <button mat-raised-button color="accent" type="submit">Save Recipe</button>
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit">Save Post</button>
   </form>
 </mat-card>
